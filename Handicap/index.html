@@ -16,9 +16,24 @@
         <input type="text" placeholder="Prenom" id="prenom" name="prenom" required> <br>
         <input type="email" placeholder="Mail" id="mail" name="mail" required>
         <input type="password" placeholder="Mot de passe" id="motdepasse" name="motdepasse" required> <br>
-        <input type="password" placeholder="Mot de passe" id="verifmotdepasse" name="verifmotdepasse" required> <br>
-        <input type="tel" placeholder="Téléphone" name="tel" id="tel" Pattern="^[0-9]{10}" size="10" maxlength="10"
-               required/>
+        <label for="tel"></label><input type="tel" placeholder="Téléphone" name="tel" id="tel" Pattern="^[0-9]{10}" size="10" maxlength="10" required/>
+        <label>Dans quel campus êtes vous?</label>
+        <select>
+            <option valeur="arr">Arras</option>
+            <option valeur="aux">Auxerre</option>
+            <option valeur="bor">Bordeaux</option>
+            <option valeur="ber">Brest </option>
+            <option valeur="dak">Dakar</option>
+            <option valeur="gre">Grenoble</option>
+            <option valeur="lil">Lille</option>
+            <option valeur="lyo">Lyon</option>
+            <option valeur="mon">Montpellier</option>
+            <option valeur="nan">Nantes</option>
+            <option valeur="par">Paris</option>
+            <option valeur="rei">Reims</option>
+            <option valeur="ren">Rennes</option>
+            <option valeur="tou">Toulouse</option>
+        </select>
         <button name="bouton_inscription">S'inscrire</button>
         <h4>Déja membre? <a href="site_connexion.html">Se connecter</a></h4>
     </div>
