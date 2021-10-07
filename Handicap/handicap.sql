@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 05 oct. 2021 à 08:17
+-- Généré le : mer. 06 oct. 2021 à 08:33
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `handicap`
 --
+CREATE DATABASE IF NOT EXISTS `handicap` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `handicap`;
 
 -- --------------------------------------------------------
 
@@ -33,10 +35,19 @@ CREATE TABLE IF NOT EXISTS `membre` (
   `Nom` varchar(50) NOT NULL,
   `Prenom` varchar(50) NOT NULL,
   `mail` varchar(50) NOT NULL,
-  `mpd` varchar(50) NOT NULL,
+  `mdp` varchar(255) NOT NULL,
   `tel` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `membre`
+--
+
+INSERT INTO `membre` (`id`, `Nom`, `Prenom`, `mail`, `mdp`, `tel`) VALUES
+(12, 'habki', 'ilyes', 'ilyeshabki@gmail.com', 'ilyeshabki', 1234567890),
+(11, 'habki', 'ilyes', 'ilyes@gmail.com', 'ilyeshabki', 1234567890),
+(10, 'test', 'test', 'test@test', '$2y$10$Ha6vmWVp4D6Kjv2Iegj9CuE7hC9CT7M2inCjJQ8pdixOtVC35STI.', 1234567890);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
