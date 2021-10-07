@@ -12,33 +12,42 @@
 
         if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['mail']) AND !empty($_POST['motdepasse']) AND !empty($_POST['tel']))
         {
-            if(filter_var($mail, FILTER_VALIDATE_EMAIL))
-            {
-                $reqmail = $bdd->prepare("SELECT * FROM membre WHERE mail = ?");
-                $reqmail->execute(array($mail));
-                $mailexist = $reqmail->rowCount();
-                if($mailexist == 0)
-                {
-                    $insertmbr = $bdd->prepare("INSERT INTO membre(Nom, Prenom, mail, mdp, tel) VALUES(?, ?, ?, ?, ?)");
-                    $insertmbr->execute(array($nom, $prenom, $mail, $motdepasse, $tel));
-                    $message = "Votre compte à bien été créer ! Vous pouvez maintenant vous connecter <a href=site_connexion.php>ici</a>";
-                }
+                    if(filter_var($mail, FILTER_VALIDATE_EMAIL))
+                    {
+                        $reqmail = $bdd->prepare("SELECT * FROM membre WHERE mail = ?");
+                        $reqmail->execute(array($mail));
+                        $mailexist = $reqmail->rowCount();
 
-                else
-                {
-                    $message = "Mail déja utilisée !";
-                }
-            }
+                        if(substr($tel,0,1) === "0")
+                        {
+                            if($mailexist == 0)
+                            {
+                                $insertmbr = $bdd->prepare("INSERT INTO membre(Nom, Prenom, mail, mdp, tel) VALUES(?, ?, ?, ?, ?)");
+                                $insertmbr->execute(array($nom, $prenom, $mail, $motdepasse, $tel));
+                                $message = "Votre compte à bien été créer ! Vous pouvez maintenant vous connecter <a href=site_connexion.php>ici</a>";
+                            }
 
-            else
-            {
-                $message = "Votre adresse mail n'est pas valide !";
-            }
+                            else
+                            {
+                                $message = "Mail déja utilisée ! <br> <br>Déja membre? <a href=\"site_connexion.php\">Se connecter</a>";
+                            }
+                        }
+
+                        else
+                        {
+                            $message = "Numéro de téléphone invalide ! <br> <br>Déja membre? <a href=\"site_connexion.php\">Se connecter</a>";
+                        }
+                    }
+
+                    else
+                    {
+                        $message = "Votre adresse mail n'est pas valide ! <br> <br>Déja membre? <a href=\"site_connexion.php\">Se connecter</a>";
+                    }
         }
 
         else
         {
-            $message = "Tous les champs doivent être complétés !";
+            $message = "Tous les champs doivent être complétés ! <br> <br>Déja membre? <a href=\"site_connexion.php\">Se connecter</a>";
         }
     }
 ?>
