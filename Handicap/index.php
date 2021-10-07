@@ -9,57 +9,31 @@
             $mail = htmlspecialchars($_POST['mail']);
             $motdepasse = sha1($_POST['motdepasse']);
             $tel = htmlspecialchars($_POST['tel']);
-            /*$epsiCampus = htmlspecialchars($_POST['epsiCampus']);*/
 
-        if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['mail']) AND !empty($_POST['motdepasse']) AND !empty($_POST['tel']) /*AND !empty($_POST['epsiCampus'])*/)
+        if(!empty($_POST['nom']) AND !empty($_POST['prenom']) AND !empty($_POST['mail']) AND !empty($_POST['motdepasse']) AND !empty($_POST['tel']))
         {
-            /*$pseudolength = strlen($pseudo);
-            if($pseudolength <= 255)
+            if(filter_var($mail, FILTER_VALIDATE_EMAIL))
             {
-                if($mail == $mail2)
-                { */  
-                    if(filter_var($mail, FILTER_VALIDATE_EMAIL))
-                    {
-                        $reqmail = $bdd->prepare("SELECT * FROM membre WHERE mail = ?");
-                        $reqmail->execute(array($mail));
-                        $mailexist = $reqmail->rowCount();
-                        if($mailexist == 0)
-                        {
-                            /*if($mdp == $mdp2)
-                            {*/
-                                $insertmbr = $bdd->prepare("INSERT INTO membre(Nom, Prenom, mail, mdp, tel) VALUES(?, ?, ?, ?, ?)");
-                                $insertmbr->execute(array($nom, $prenom, $mail, $motdepasse, $tel));
-                                $message = "Votre compte à bien été créer ! Vous pouvez maintenant vous connecter <a href=site_connexion.php>ici</a>";
-                            /*}
-                            
-                            else
-                            {
-                                $message = "Vos mots de passes ne correspondent pas !";
-                            }*/
-                        }
-
-                        else
-                        {
-                            $message = "Mail déja utilisée !";
-                        }
-                    }
-
-                    else
-                    {
-                        $message = "Votre adresse mail n'est pas valide !";
-                    }
-                /*}
+                $reqmail = $bdd->prepare("SELECT * FROM membre WHERE mail = ?");
+                $reqmail->execute(array($mail));
+                $mailexist = $reqmail->rowCount();
+                if($mailexist == 0)
+                {
+                    $insertmbr = $bdd->prepare("INSERT INTO membre(Nom, Prenom, mail, mdp, tel) VALUES(?, ?, ?, ?, ?)");
+                    $insertmbr->execute(array($nom, $prenom, $mail, $motdepasse, $tel));
+                    $message = "Votre compte à bien été créer ! Vous pouvez maintenant vous connecter <a href=site_connexion.php>ici</a>";
+                }
 
                 else
                 {
-                    $message = "Vos adresses mail ne correspondent pas !";
+                    $message = "Mail déja utilisée !";
                 }
             }
 
             else
             {
-                $message = "Votre pseudo ne doit pas dépasser 255 caractères !";
-            }*/
+                $message = "Votre adresse mail n'est pas valide !";
+            }
         }
 
         else
